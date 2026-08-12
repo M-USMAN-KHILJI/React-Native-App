@@ -25,6 +25,7 @@ import CustomButton from '../Components/CustomButton.jsx';
 import GoogleButton from '../Components/GoogleButton.jsx';
 import AuthHeader from '../Components/AuthHeader';
 import TermsBottomSheet from '../Components/TermsBottomSheet';
+import useGoogleSignIn from '../api/Google.js';
 
 export {
     View,
@@ -57,5 +58,6 @@ export {
     useContext,
     AuthHeader,
     useRef,
-    TermsBottomSheet
+    TermsBottomSheet,
+    useGoogleSignIn
 }

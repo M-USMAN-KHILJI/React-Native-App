@@ -7,6 +7,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const Loading = () => {
   const navigation = useNavigation();
 
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigation.replace('Login');

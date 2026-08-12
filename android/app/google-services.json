@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "465563276332",
+    "project_id": "kazino-33220",
+    "storage_bucket": "kazino-33220.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465563276332:android:042921cb33c1941d2b6d89",
+        "android_client_info": {
+          "package_name": "com.kazina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465563276332-ioit8pi9hqic3m016htt79b5lqrpr8l4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kazina",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "465563276332-lia005quikdf14hu327s3ko2givlnrac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZtiK5Dsi94nFhMe8PHtoavrFV2XMF6u8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465563276332-lia005quikdf14hu327s3ko2givlnrac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

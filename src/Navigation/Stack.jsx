@@ -6,6 +6,7 @@ import SignUp from '../Screens/Auth/Signup'
 import ForgotPassword from '../Screens/Auth/ForgotPassword'
 import ResetPassword from '../Screens/Auth/ResetPassword'
 import NewPassword from '../Screens/Auth/NewPassword'
+import Home from '../Screens/Main/Home'
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const StackNavigation = () => {
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="ResetPassword" component={ResetPassword} />
         <Stack.Screen name="NewPassword" component={NewPassword} />
+        <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   )
 }

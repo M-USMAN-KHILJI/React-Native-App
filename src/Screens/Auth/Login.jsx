@@ -28,9 +28,11 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
     Keyboard,
-    TermsBottomSheet
+    TermsBottomSheet,
+    useGoogleSignIn,
 } from '../../api/Index'
 const Login = ({ navigation }) => {
+  const { onGooglePress } = useGoogleSignIn();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -193,7 +195,7 @@ const Login = ({ navigation }) => {
             </View>
    
 
-           <GoogleButton />
+           <GoogleButton onPress={onGooglePress} />
 
 
         </View>
