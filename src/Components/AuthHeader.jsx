@@ -10,11 +10,21 @@ const AuthHeader = ({ title }) => {
     <View>
       <View style={styles.imageContainer}>
         <View style={styles.videoWrapper}>
-          <Video 
+          {/* <Video 
             source={require('../assets/logo_video.mp4')}
             style={styles.logo} 
             repeat={true} 
             resizeMode="cover" 
+            muted={true}
+            playInBackground={false}
+            playWhenInactive={false}
+            disableFocus={true}
+          /> */}
+          <Video
+            source={require('../assets/logo_video.mp4')}
+            style={styles.logo}
+            repeat={true}
+            resizeMode="cover"
             muted={true}
             playInBackground={false}
             playWhenInactive={false}

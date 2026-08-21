@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const CustomButton = ({ title, onPress, buttonStyle, textStyle }) => {
+const CustomButton = ({ title, onPress, buttonStyle, textStyle , icon}) => {
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
       <LinearGradient
@@ -12,6 +12,7 @@ const CustomButton = ({ title, onPress, buttonStyle, textStyle }) => {
         end={{ x: 1, y: 0.5 }}
         style={[styles.signInButton, buttonStyle]}
       >
+        {icon}
         <Text style={[styles.signInText, textStyle]}>{title}</Text>
       </LinearGradient>
     </TouchableOpacity>
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
     borderColor: '#F7DA6A',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   signInText: {
     fontSize: hp('2%'),

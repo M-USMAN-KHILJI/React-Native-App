@@ -31,6 +31,9 @@ import {
     TermsBottomSheet,
     useGoogleSignIn,
 } from '../../api/Index'
+import { useDispatch, useSelector } from 'react-redux'
+
+
 const Login = ({ navigation }) => {
   const { onGooglePress } = useGoogleSignIn();
   const [showPassword, setShowPassword] = useState(false);
@@ -40,8 +43,13 @@ const Login = ({ navigation }) => {
   const [passwordError, setPasswordError] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const dispatch = useDispatch();
+  const credentials = useSelector(state => state.auth.credentials);
+
 
   const handleSignIn = () => {
+      setLoginError(''); // Clear any previous login error
       let isValid = true;
       if (!email.trim()) {
           setEmailError('enter your email');
@@ -52,7 +60,12 @@ const Login = ({ navigation }) => {
           isValid = false;
       }
       if (isValid) {
-          // Perform sign-in logic here
+          // Check credentials from Redux
+          if (email === credentials.email && password === credentials.password) {
+              navigation.navigate('Home');
+          } else {
+              setLoginError('Account not found. Create an account');
+          }
       }
   };
 
@@ -92,6 +105,7 @@ const Login = ({ navigation }) => {
                     onChangeText={(text) => {
                         setEmail(text);
                         setEmailError('');
+                        setLoginError('');
                     }}
                 />
                 {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
@@ -109,6 +123,7 @@ const Login = ({ navigation }) => {
                     onChangeText={(text) => {
                         setPassword(text);
                         setPasswordError('');
+                        setLoginError('');
                     }}
                     iconRight={
                             <TouchableOpacity
@@ -174,6 +189,7 @@ const Login = ({ navigation }) => {
             <View style={styles.Button}>{/* sign in button */}
 
                 <CustomButton title="Sign In" onPress={handleSignIn} />
+                {loginError ? <Text style={styles.errorText}>{loginError}</Text> : null}
                 
             </View>
 

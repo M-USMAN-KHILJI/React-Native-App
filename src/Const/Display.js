@@ -15,6 +15,23 @@ export const COLORS= {
     Black : '#000000',
     logoBorder : '#d6bc65ad',
     cartBarder : '#20242F',
+    homebackground : '#100d20',
+    goldenBtn: '#d3b160',
+    btnTextBlack: '#000000',
+    btnTextWhite: '#ffffff',
+    subtitleGray: '#b3b6bd',
+
+    // Challenge & Tab colors
+    gold: '#e8c976',
+    goldDark: '#a9873f',
+    white: '#ffffff',
+    grayText: '#9a92b8',
+    chipBorder: '#4a4560',
+    chipBg: 'rgba(255, 255, 255, 0.06)',
+    activeChipBg: '#e8c976',
+    activeChipText: '#000000',
+    tabInactiveBg: 'rgba(255, 255, 255, 0.06)',
+    tabInactiveBorder: '#4a4560',
 };
 
 export const FONT_SIZES = {
@@ -24,11 +41,9 @@ export const FONT_SIZES = {
   h4: 20,
   h5: 18,
   h6: 16,
-
   bodyLarge: 16,
   body: 14,
   bodySmall: 12,
-
   caption: 11,
   tiny: 10,
   large : 40,

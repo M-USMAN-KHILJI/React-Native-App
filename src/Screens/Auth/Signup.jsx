@@ -32,6 +32,9 @@ import {
     useGoogleSignIn
 } from '../../api/Index'
 
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../../redux/authSlice';
+
 
 const Signup = ({ navigation }) => {
   const { onGooglePress } = useGoogleSignIn();
@@ -49,6 +52,7 @@ const Signup = ({ navigation }) => {
   
   const [rememberMe, setRememberMe] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+  const dispatch = useDispatch();
 
   const hasErrors = !!(usernameError || emailError || passwordError || confirmPasswordError);
 
@@ -59,7 +63,13 @@ const Signup = ({ navigation }) => {
       if (!password.trim()) { setPasswordError('password not entered'); isValid = false; }
       if (!confirmPassword.trim()) { setConfirmPasswordError('confirm password not entered'); isValid = false; }
       if (isValid) {
-          // Perform sign-up logic
+          setUsernameError('');
+          setEmailError('');
+          setPasswordError('');
+          setConfirmPasswordError('');
+          dispatch(setCredentials({ username, email, password }));
+          Alert.alert('Account created successfully');
+          navigation.navigate('Login');
       }
   };
 

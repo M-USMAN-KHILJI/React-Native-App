@@ -14,6 +14,8 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
     Keyboard,
+    Modal,
+    Dimensions,
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS, FONT_SIZES } from '../Const/Display.js';
@@ -26,6 +28,9 @@ import GoogleButton from '../Components/GoogleButton.jsx';
 import AuthHeader from '../Components/AuthHeader';
 import TermsBottomSheet from '../Components/TermsBottomSheet';
 import useGoogleSignIn from '../api/Google.js';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import screenHarder from '../Components/screenHarder.jsx';
+import LinearGradient from 'react-native-linear-gradient';
 
 export {
     View,
@@ -59,5 +64,10 @@ export {
     AuthHeader,
     useRef,
     TermsBottomSheet,
-    useGoogleSignIn
+    useGoogleSignIn,
+    Modal,
+    Dimensions,
+    MaterialCommunityIcons,
+    screenHarder,
+    LinearGradient,
 }
