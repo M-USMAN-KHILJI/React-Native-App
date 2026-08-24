@@ -4,6 +4,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { getAuth, GoogleAuthProvider, signInWithCredential } from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import { setUser, clearUser } from '../redux/authSlice';
+import { clearAuthSession, saveAuthSession } from './session';
 
 export default function useGoogleSignIn() {
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ export default function useGoogleSignIn() {
     const userCredential = await signInWithCredential(getAuth(), googleCredential);
 
     const { displayName, email, photoURL, uid } = userCredential.user;
-    dispatch(setUser({ name: displayName, email, photoURL, uid }));
+    const user = { name: displayName, email, photoURL, uid };
+    await saveAuthSession(user);
+    dispatch(setUser(user));
 
     // Reset the stack instead of navigate() — this wipes out the Login
     // screen from history, so the back button/gesture has nothing to
@@ -55,6 +58,7 @@ export default function useGoogleSignIn() {
     try {
       await GoogleSignin.signOut();
       await getAuth().signOut();
+      await clearAuthSession();
       dispatch(clearUser());
 
       // Same idea in reverse: reset the stack to Login so Home is

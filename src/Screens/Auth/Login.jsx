@@ -32,7 +32,8 @@ import {
     useGoogleSignIn,
 } from '../../api/Index'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { saveAuthSession } from '../../api/session';
+import { setUser } from '../../redux/authSlice';
 
 const Login = ({ navigation }) => {
   const { onGooglePress } = useGoogleSignIn();
@@ -48,7 +49,7 @@ const Login = ({ navigation }) => {
   const credentials = useSelector(state => state.auth.credentials);
 
 
-  const handleSignIn = () => {
+    const handleSignIn = async () => {
       setLoginError(''); // Clear any previous login error
       let isValid = true;
       if (!email.trim()) {
@@ -62,6 +63,14 @@ const Login = ({ navigation }) => {
       if (isValid) {
           // Check credentials from Redux
           if (email === credentials.email && password === credentials.password) {
+              const user = {
+                  name: credentials.username,
+                  email: credentials.email,
+                  photoURL: null,
+                  uid: null,
+              };
+              await saveAuthSession(user);
+              dispatch(setUser(user));
               navigation.navigate('Home');
           } else {
               setLoginError('Account not found. Create an account');
