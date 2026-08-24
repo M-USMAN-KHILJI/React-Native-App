@@ -18,11 +18,13 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 const SHEET_HEIGHT = hp(65);
 
-const EnergyBar = ({ visible, onClose }) => {
+const EnergyBar = ({ visible, onClose, energy = 370, timeLeft = 0, formatTime = () => '', energyPercentage = 100 }) => {
   const slideAnim = useRef(new Animated.Value(SHEET_HEIGHT)).current;
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (visible) {
@@ -38,7 +40,7 @@ const EnergyBar = ({ visible, onClose }) => {
         useNativeDriver: true,
       }).start();
     }
-  }, [visible]);
+  }, [visible, slideAnim]);
 
   // PanResponder for swipe-down-to-close
   const panResponder = useRef(
@@ -71,6 +73,15 @@ const EnergyBar = ({ visible, onClose }) => {
       },
     })
   ).current;
+
+  // Close the sheet instantly (no slide-down animation) and navigate immediately.
+  // This prevents the modal from lingering on top of the EnergyPacks screen
+  // while the 250ms close animation plays out.
+  const handleGetEnergyPacks = () => {
+    slideAnim.setValue(SHEET_HEIGHT);
+    onClose();
+    navigation.navigate("EnergyPacks");
+  };
 
   return (
     <Modal
@@ -121,7 +132,7 @@ const EnergyBar = ({ visible, onClose }) => {
                 </View>
                 <View>
                   <View style={styles.energyValueRow}>
-                    <Text style={styles.energyValue}>370</Text>
+                    <Text style={styles.energyValue}>{energy}</Text>
                     <Text style={styles.energyMax}> / 370</Text>
                   </View>
                   <Text style={styles.energyAvailable}>ENERGY AVAILABLE</Text>
@@ -129,21 +140,29 @@ const EnergyBar = ({ visible, onClose }) => {
               </View>
 
               {/* Progress Bar */}
-              {/* <View style={styles.progressTrack}>
-                <View style={[styles.progressFill, { width: '100%' }]} />
-              </View> */}
-              <LinearGradient
-                              start={{ x: 0, y: 0 }}
-                              end={{ x: 1, y: 0 }}
-                              colors={['#f2dd88ea', '#debe56' , '#bc9b37' , '#8c733c']}
-                              style={styles.progressFill}
-                              />
+              <View style={styles.progressTrack}>
+                <LinearGradient
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  colors={['#f2dd88ea', '#debe56' , '#bc9b37' , '#8c733c']}
+                  style={[styles.progressFill, { width: `${energyPercentage}%` }]}
+                />
+              </View>
 
               {/* Badges Row */}
               <View style={styles.badgesRow}>
                 <View style={styles.badgePill}>
-                  <MaterialCommunityIcons name="battery-charging" size={wp(4)} color="#e8c976" />
-                  <Text style={styles.badgePillText}>Fully charged</Text>
+                  {energy >= 370 ? (
+                    <>
+                      <MaterialCommunityIcons name="battery-charging" size={wp(4)} color="#e8c976" />
+                      <Text style={styles.badgePillText}>Fully charged</Text>
+                    </>
+                  ) : (
+                    <>
+                      <MaterialCommunityIcons name="clock-outline" size={wp(4)} color="#e8c976" />
+                      <Text style={styles.badgePillText}>+5 in {formatTime(timeLeft)}</Text>
+                    </>
+                  )}
                 </View>
                 <View style={styles.badgePill}>
                   <MaterialCommunityIcons name="eye" size={wp(4)} color="#e8c976" />
@@ -171,7 +190,7 @@ const EnergyBar = ({ visible, onClose }) => {
               </TouchableOpacity>
             </LinearGradient>
 
-            <TouchableOpacity activeOpacity={0.8} style={styles.outlineButton}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.outlineButton} onPress={handleGetEnergyPacks}>
               <MaterialCommunityIcons name="shopping-outline" size={wp(5)} color="#e8c976" />
               <Text style={styles.outlineButtonText}>GET ENERGY PACKS</Text>
             </TouchableOpacity>
@@ -307,11 +326,8 @@ const styles = StyleSheet.create({
     marginBottom: hp(2),
   },
   progressFill: {
-    width: wp(79),
-    height: hp(0.8),
+    height: '100%',
     borderRadius: hp(0.6),
-    marginBottom: hp(2),
-    
   },
   badgesRow: {
     flexDirection: 'row',

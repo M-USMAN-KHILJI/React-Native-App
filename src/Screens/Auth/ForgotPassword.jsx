@@ -171,7 +171,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: FONT_SIZES.body,
         marginLeft: wp(1.5),
-        marginTop: hp(1.5),
         marginTop : hp(3),
     },
     onetime1 : {

@@ -1,42 +1,9 @@
-import { create } from 'react-native/types_generated/Libraries/ReactNative/ReactFabricPublicInstance/ReactNativeAttributePayload'
-import {
-        View,
-    Text,
-    StyleSheet,
-    TextInput,
-    Image,
-    ActivityIndicator,
-    TouchableOpacity,
-    Button,
-    Platform,
-    KeyboardAvoidingView,
-    Alert,
-    ScrollView,
-    TouchableWithoutFeedback,
-    Keyboard,
-    wp,
-    hp,
-    COLORS,
-    FONT_SIZES,
-    logo,
-    SafeAreaView,
-    FontAwesome,
-    CustomInput,
-    CustomButton,
-    GoogleButton,
-    React,
-    useState,
-    useEffect,
-    useContext,
-    AuthHeader,
-    useRef,
-    TermsBottomSheet,
-    useGoogleSignIn,
-    Modal,
-    MaterialCommunityIcons,
-    
-}
-from '../../api/Index'
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { COLORS } from '../../Const/Display';
 import ScreenHarder from '../../Components/screenHarder'
 
 const Multiplayer = ({navigation}) => {
@@ -54,7 +21,7 @@ const Multiplayer = ({navigation}) => {
             <Text style={styles.pageSubtitle}>Play against others globally or host a private match with friends.</Text>
         </View>
 
-        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("PublicMatch")}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.card} onPress={() => navigation.navigate("PublicMatch")}>
             <View style={styles.iconContainer}>
                 <MaterialCommunityIcons name="earth" size={24} color="#f7c873" />
             </View>
@@ -65,7 +32,7 @@ const Multiplayer = ({navigation}) => {
             <MaterialCommunityIcons name="chevron-right" size={24} color="#ffffff" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('PrivateMatch')}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.card} onPress={() => navigation.navigate('PrivateMatch')}>
             <View style={styles.iconContainer}>
                 <MaterialCommunityIcons name="account-group" size={24} color="#f7c873" />
             </View>

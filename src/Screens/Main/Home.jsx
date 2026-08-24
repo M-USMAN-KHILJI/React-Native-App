@@ -28,6 +28,35 @@ const Home = ({ navigation }) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [isEnergyVisible, setIsEnergyVisible] = useState(false);
 
+  const [energy, setEnergy] = useState(300); // Starting at 300 to show the timer
+  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+
+  useEffect(() => {
+    let timer = null;
+    if (energy < 370) {
+      timer = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            setEnergy((prevEnergy) => Math.min(prevEnergy + 5, 370));
+            return 300; // Reset timer to 5 minutes
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [energy]);
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  };
+
+  const energyPercentage = Math.min((energy / 370) * 100, 100);
+
   const floatAnim = useRef(new Animated.Value(0)).current;
 
   // Derive X movement directly from Y movement for perfect sync
@@ -56,8 +85,20 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <CustomDrawer visible={isDrawerVisible} onClose={() => setIsDrawerVisible(false)} navigation={navigation} />
-      <EnergyBar visible={isEnergyVisible} onClose={() => setIsEnergyVisible(false)} />
+      {/* <CustomDrawer visible={isDrawerVisible} onClose={() => setIsDrawerVisible(false)} navigation={navigation} /> */}
+      <CustomDrawer
+        visible={isDrawerVisible}
+        onClose={() => setIsDrawerVisible(false)}
+        navigation={navigation}
+      />
+      <EnergyBar
+        visible={isEnergyVisible} 
+        onClose={() => setIsEnergyVisible(false)} 
+        energy={energy} 
+        timeLeft={timeLeft} 
+        formatTime={formatTime} 
+        energyPercentage={energyPercentage} 
+      />
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
 
         {/* Header */}
@@ -71,7 +112,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.headerTitle}>KAZINO</Text>
           </View>
 
-          <TouchableOpacity activeOpacity={0.7} style={styles.iconButton}>
+          <TouchableOpacity activeOpacity={0.7} style={styles.iconButton} onPress={() => navigation.navigate('Notifaction')}>
             <FontAwesome name="bell" size={hp(2.6)} color={COLORS.gold} />
             <View style={styles.badge}>
               <Text style={styles.badgeText}>1</Text>
@@ -90,28 +131,34 @@ const Home = ({ navigation }) => {
               <View>
                 <Text style={styles.energyLabel}>LOUNGE ENERGY</Text>
                 <View style={styles.energyValueRow}>
-                  <Text style={styles.energyValue}>350</Text>
-                  <Text style={styles.energyMax}> / 350</Text>
+                  <Text style={styles.energyValue}>{energy}</Text>
+                  <Text style={styles.energyMax}> / 370</Text>
                 </View>
               </View>
             </View>
 
             <View style={styles.energyRight}>
-              <View style={styles.fullBadge}>
-                <FontAwesome name="check-circle" size={hp(1.5)} color={COLORS.gold} />
-                <Text style={styles.fullBadgeText}> FULL</Text>
-              </View>
+              {energy >= 370 ? (
+                <View style={styles.fullBadge}>
+                  <FontAwesome name="check-circle" size={hp(1.5)} color={COLORS.gold} />
+                  <Text style={styles.fullBadgeText}> FULL</Text>
+                </View>
+              ) : (
+                <View style={styles.timerBadge}>
+                  <FontAwesome name="clock-o" size={hp(1.5)} color={COLORS.gold} />
+                  <Text style={styles.timerBadgeText}>{formatTime(timeLeft)}</Text>
+                </View>
+              )}
               <Text style={styles.perMatch}>10 / match</Text>
             </View>
           </View>
 
           <View style={styles.progressTrack}>
-            {/* <View style={[styles.progressFill, { width: '100%' }]} /> */}
             <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 colors={['#f2dd88ea', '#debe56' , '#bc9b37' , '#8c733c']}
-                style={styles.progressFill}
+                style={[styles.progressFill, { width: `${energyPercentage}%` }]}
                 />
           </View>
         </View>
@@ -274,6 +321,21 @@ const styles = StyleSheet.create({
     color: COLORS.gold,
     fontSize: hp(1.3),
     fontWeight: 'bold',
+  },
+  timerBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLORS.grayText,
+    borderRadius: wp(5),
+    paddingHorizontal: wp(3),
+    paddingVertical: hp(0.4),
+  },
+  timerBadgeText: {
+    color: COLORS.grayText,
+    fontSize: hp(1.3),
+    fontWeight: 'bold',
+    marginLeft: wp(1),
   },
   perMatch: {
     color: COLORS.grayText,

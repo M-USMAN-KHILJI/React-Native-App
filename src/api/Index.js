@@ -12,10 +12,12 @@ import {
     KeyboardAvoidingView,
     Alert,
     ScrollView,
+    FlatList,
     TouchableWithoutFeedback,
     Keyboard,
     Modal,
     Dimensions,
+    Share,
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS, FONT_SIZES } from '../Const/Display.js';
@@ -31,6 +33,8 @@ import useGoogleSignIn from '../api/Google.js';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import screenHarder from '../Components/screenHarder.jsx';
 import LinearGradient from 'react-native-linear-gradient';
+import CustomDrawer from '../Components/drawer';
+
 
 export {
     View,
@@ -45,6 +49,7 @@ export {
     KeyboardAvoidingView,
     Alert,
     ScrollView,
+    FlatList,
     TouchableWithoutFeedback,
     Keyboard,
     wp,
@@ -70,4 +75,7 @@ export {
     MaterialCommunityIcons,
     screenHarder,
     LinearGradient,
+    CustomDrawer,
+    Share,
+    
 }

@@ -14,6 +14,7 @@ import PrivateMatch from '../Screens/Main/privateMatch'
 import CreateMatch from '../Screens/Main/createMatch'
 import Challenges from '../Screens/Main/Challenges'
 import EnergyPacks from '../Screens/Main/energyPacks'
+import Notifaction from '../Screens/Main/Notifaction'
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ const StackNavigation = () => {
         <Stack.Screen name="CreateMatch" component={CreateMatch} />
         <Stack.Screen name="Challenges" component={Challenges} />
         <Stack.Screen name="EnergyPacks" component={EnergyPacks} />
+        <Stack.Screen name="Notifaction" component={Notifaction} />
     </Stack.Navigator>
   )
 }

@@ -16,6 +16,16 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useSelector } from 'react-redux';
+import { useRoute } from '@react-navigation/native';
+
+// Map route names to drawer menu item names
+const routeToMenuName = {
+  Home: 'Home',
+  Shop: 'Shop',
+  Multiplayer: 'Multiplayer',
+  Notifaction: 'Notifications',
+};
 
 
 const { width } = Dimensions.get('window');
@@ -40,6 +50,16 @@ const DRAWER_WIDTH = width * 0.75;
 
 const CustomDrawer = ({ visible, onClose, onItemPress, onSignOut, navigation }) => {
   const slideAnim = useRef(new Animated.Value(-DRAWER_WIDTH)).current;
+
+  const user = useSelector(state => state.auth.user);
+  const credentials = useSelector(state => state.auth.credentials);
+
+  const displayName = user?.name || credentials?.username || 'Guest';
+  const displayEmail = user?.email || credentials?.email || 'No email provided';
+  const initials = displayName.substring(0, 2).toUpperCase();
+
+  const route = useRoute();
+  const activeMenuName = routeToMenuName[route.name] || 'Home';
 
   useEffect(() => {
     if (visible) {
@@ -78,12 +98,12 @@ const CustomDrawer = ({ visible, onClose, onItemPress, onSignOut, navigation }) 
           {/* Profile Header */}
           <View style={styles.containerheader}>
             <View style={styles.profileCircle}>
-              <Text style={styles.profileText}>US</Text>
+              <Text style={styles.profileText}>{initials}</Text>
             </View>
 
             <View style={styles.userInfo}>
-              <Text style={styles.username}>usman_khilji</Text>
-              <Text style={styles.email}>uk4790907@gmail.com</Text>
+              <Text style={styles.username}>{displayName}</Text>
+              <Text style={styles.email}>{displayEmail}</Text>
             </View>
           </View>
 
@@ -105,13 +125,20 @@ const CustomDrawer = ({ visible, onClose, onItemPress, onSignOut, navigation }) 
                   } else if (item.name === 'Home') {
                     onClose();
                     navigation?.navigate('Home');
-                  } else {
+                  } else if (item.name === 'Multiplayer') {
+                    onClose();
+                    navigation?.navigate('Multiplayer');
+                  } else if (item.name === 'Notifications') {
+                    onClose();
+                    navigation?.navigate('Notifaction');
+                  }
+                  else {
                     if (onItemPress) onItemPress(item.name);
                   }
                 }}
                 style={[
                   styles.menuItem,
-                  index === 0 && styles.activeMenuItem, // Home active by default
+                  item.name === activeMenuName && styles.activeMenuItem,
                 ]}
               >
                 <MaterialCommunityIcons
@@ -124,7 +151,7 @@ const CustomDrawer = ({ visible, onClose, onItemPress, onSignOut, navigation }) 
                 <Text
                   style={[
                     styles.menuText,
-                    index === 0 && styles.activeMenuText,
+                    item.name === activeMenuName && styles.activeMenuText,
                   ]}
                 >
                   {item.name}
@@ -138,7 +165,10 @@ const CustomDrawer = ({ visible, onClose, onItemPress, onSignOut, navigation }) 
             <TouchableOpacity
               style={styles.signOutButton}
               activeOpacity={0.8}
-              onPress={onSignOut}
+              onPress={() => {
+                onClose();
+                navigation?.navigate('Login');
+              }}
             >
               <Text style={styles.signOutText}>Sign out</Text>
             </TouchableOpacity>
