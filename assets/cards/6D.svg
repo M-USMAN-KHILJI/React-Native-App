@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 336">
+  <rect x="2" y="2" width="236" height="332" rx="12" ry="12" fill="#FFFFFF" stroke="#BBBBBB" stroke-width="1.5"/>
+  <text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="bold" fill="#cc0000" text-anchor="middle">6</text><text x="20" y="58" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#cc0000" text-anchor="middle">♦</text>
+  <g transform="rotate(180, 120, 168)"><text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="bold" fill="#cc0000" text-anchor="middle">6</text><text x="20" y="58" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#cc0000" text-anchor="middle">♦</text></g>
+  <g transform="translate(70, 75) scale(0.3)"><path d="M 50 6 L 88 50 L 50 94 L 12 50 Z" fill="#cc0000"/></g>
+  <g transform="translate(140, 75) scale(0.3)"><path d="M 50 6 L 88 50 L 50 94 L 12 50 Z" fill="#cc0000"/></g>
+  <g transform="translate(70, 153) scale(0.3)"><path d="M 50 6 L 88 50 L 50 94 L 12 50 Z" fill="#cc0000"/></g>
+  <g transform="translate(140, 153) scale(0.3)"><path d="M 50 6 L 88 50 L 50 94 L 12 50 Z" fill="#cc0000"/></g>
+  <g transform="translate(85, 246) rotate(180) translate(-15, -15) scale(0.3)"><path d="M 50 6 L 88 50 L 50 94 L 12 50 Z" fill="#cc0000"/></g>
+  <g transform="translate(155, 246) rotate(180) translate(-15, -15) scale(0.3)"><path d="M 50 6 L 88 50 L 50 94 L 12 50 Z" fill="#cc0000"/></g>
+</svg>

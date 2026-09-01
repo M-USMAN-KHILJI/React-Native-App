@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 336">
+  <rect x="2" y="2" width="236" height="332" rx="12" ry="12" fill="#FFFFFF" stroke="#BBBBBB" stroke-width="1.5"/>
+  <text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="bold" fill="#cc0000" text-anchor="middle">A</text><text x="20" y="58" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#cc0000" text-anchor="middle">♥</text>
+  <g transform="rotate(180, 120, 168)"><text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="bold" fill="#cc0000" text-anchor="middle">A</text><text x="20" y="58" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#cc0000" text-anchor="middle">♥</text></g>
+  <g transform="translate(80, 128) scale(0.8)"><path d="M 50 84 C 50 84 14 56 14 36 C 14 20 28 10 50 30 C 72 10 86 20 86 36 C 86 56 50 84 50 84 Z" fill="#cc0000"/></g>
+</svg>

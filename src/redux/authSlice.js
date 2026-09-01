@@ -28,7 +28,7 @@ const authSlice = createSlice({
     },
     clearUser: (state) => {
       state.user = { name: null, email: null, photoURL: null, uid: null };
-    },
+    },      
     setCredentials: (state, action) => {
       state.credentials = action.payload;
     },

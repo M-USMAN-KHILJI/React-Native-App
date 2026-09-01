@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Animated } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Animated, Easing } from 'react-native';
 import CustomDrawer from '../../Components/drawer';
 import EnergyBar from '../../Components/energyBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -57,35 +57,32 @@ const Home = ({ navigation }) => {
 
   const energyPercentage = Math.min((energy / 370) * 100, 100);
 
-  const floatAnim = useRef(new Animated.Value(0)).current;
-
-  // Derive X movement directly from Y movement for perfect sync
-  const floatAnimX = floatAnim.interpolate({
-    inputRange: [0, 0],
-    outputRange: [-5, 5] // -20 (Up) -> -5 (Back), 0 (Down) -> 5 (Forward)
-  });
+  // Smooth zoom pulse, matched to the reference video: a gentle
+  // breathing scale (1 -> 1.12 -> 1), each half taking ~1.65s so
+  // the full cycle is ~3.3s, same rhythm as the video.
+  const zoomAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    // Up and down animation (X is synced automatically via interpolation)
     Animated.loop(
       Animated.sequence([
-        Animated.timing(floatAnim, {
-          toValue: -20,
-          duration: 1500,
+        Animated.timing(zoomAnim, {
+          toValue: 1.06,
+          duration: 1650,
+          easing: Easing.inOut(Easing.sin),
           useNativeDriver: true,
         }),
-        Animated.timing(floatAnim, {
-          toValue: 0,
-          duration: 1500,
+        Animated.timing(zoomAnim, {
+          toValue: 1,
+          duration: 1650,
+          easing: Easing.inOut(Easing.sin),
           useNativeDriver: true,
         }),
       ])
     ).start();
-  }, [floatAnim]);
+  }, [zoomAnim]);
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <CustomDrawer visible={isDrawerVisible} onClose={() => setIsDrawerVisible(false)} navigation={navigation} /> */}
       <CustomDrawer
         visible={isDrawerVisible}
         onClose={() => setIsDrawerVisible(false)}
@@ -168,7 +165,7 @@ const Home = ({ navigation }) => {
         <TouchableOpacity style={styles.cardContainer} onPress={() => navigation.navigate('Multiplayer')}>
           <Animated.Image
             source={require('../../assets/fair.png')}
-            style={[styles.largeImage, { transform: [{ translateY: floatAnim }, { translateX: floatAnimX }] }]}
+            style={[styles.largeImage, { transform: [{ scale: zoomAnim }] }]}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -178,7 +175,7 @@ const Home = ({ navigation }) => {
           <TouchableOpacity style={styles.smallCardContainer} onPress={() => navigation.navigate("Shop")}>
             <Animated.Image
               source={require('../../assets/shop.png')}
-              style={[styles.smallImage, { transform: [{ translateY: floatAnim }, { translateX: floatAnimX }] }]}
+              style={[styles.smallImage, { transform: [{ scale: zoomAnim }] }]}
               resizeMode="contain"
             />
           </TouchableOpacity>
@@ -186,7 +183,7 @@ const Home = ({ navigation }) => {
           <TouchableOpacity style={styles.smallCardContainer}>
             <Animated.Image
               source={require('../../assets/colation.png')}
-              style={[styles.smallImage, { transform: [{ translateY: floatAnim }, { translateX: floatAnimX }] }]}
+              style={[styles.smallImage, { transform: [{ scale: zoomAnim }] }]}
               resizeMode="contain"
             />
           </TouchableOpacity>
@@ -400,9 +397,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.practiceGreen,
-    borderWidth: 1,
+    borderWidth: wp(0.7),
     borderColor: COLORS.goldDark,
-    borderRadius: wp(8),
+    borderRadius: wp(4),
     height: hp(7),
     marginTop: hp(3),
   },

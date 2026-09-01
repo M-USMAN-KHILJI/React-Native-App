@@ -32,6 +32,21 @@ export const COLORS= {
     activeChipText: '#000000',
     tabInactiveBg: 'rgba(255, 255, 255, 0.06)',
     tabInactiveBorder: '#4a4560',
+
+
+      background2: '#150f2b',
+  homeCardBackground: '#1b1440',
+  gold: '#e8c976',
+  goldDark: '#a9873f',
+  // white: '#ffffff',
+  grayText: '#9a92b8',
+  green: '#1e4d3a',
+  greenDark: '#12332a',
+  navy: '#1a2a4a',
+  navyDark: '#0f1c33',
+  maroon: '#3d1220',
+  maroonDark: '#20090f',
+  practiceGreen: '#1c3d33',
 };
 
 export const FONT_SIZES = {

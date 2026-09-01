@@ -96,6 +96,7 @@ const CustomDrawer = ({ visible, onClose, onItemPress, onSignOut, navigation }) 
           ]}
         >
           {/* Profile Header */}
+          <TouchableOpacity activeOpacity={1} onPress={() => {onClose(); navigation.navigate('Profile')}}>
           <View style={styles.containerheader}>
             <View style={styles.profileCircle}>
               <Text style={styles.profileText}>{initials}</Text>
@@ -106,6 +107,7 @@ const CustomDrawer = ({ visible, onClose, onItemPress, onSignOut, navigation }) 
               <Text style={styles.email}>{displayEmail}</Text>
             </View>
           </View>
+          </TouchableOpacity>
 
           {/* Menu List */}
           <ScrollView

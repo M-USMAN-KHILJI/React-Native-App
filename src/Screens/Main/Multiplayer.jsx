@@ -1,9 +1,18 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { COLORS } from '../../Const/Display';
+import { create } from 'react-native/types_generated/Libraries/ReactNative/ReactFabricPublicInstance/ReactNativeAttributePayload'
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    wp,
+    hp,
+    COLORS,
+    SafeAreaView,
+    React,
+    MaterialCommunityIcons,
+    
+}
+from '../../api/Index'
 import ScreenHarder from '../../Components/screenHarder'
 
 const Multiplayer = ({navigation}) => {
@@ -21,7 +30,7 @@ const Multiplayer = ({navigation}) => {
             <Text style={styles.pageSubtitle}>Play against others globally or host a private match with friends.</Text>
         </View>
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.card} onPress={() => navigation.navigate("PublicMatch")}>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("PublicMatch")}>
             <View style={styles.iconContainer}>
                 <MaterialCommunityIcons name="earth" size={24} color="#f7c873" />
             </View>
@@ -42,6 +51,20 @@ const Multiplayer = ({navigation}) => {
             </View>
             <MaterialCommunityIcons name="chevron-right" size={24} color="#ffffff" />
         </TouchableOpacity>
+
+
+        <TouchableOpacity activeOpacity={0.8} style={styles.card} onPress={() => navigation.navigate('Tormament')}>
+            <View style={styles.iconContainer}>
+                <MaterialCommunityIcons name="trophy-outline" size={24} color="#f7c873" />
+            </View>
+            <View style={styles.cardTextContainer}>
+                <Text style={styles.cardTitle}>TOURNAMENT</Text>
+                <Text style={styles.cardDescription}> CRITICAL TOURNAMENT </Text>
+            </View>
+            <MaterialCommunityIcons name="chevron-right" size={24} color="#ffffff" />
+        </TouchableOpacity>
+
+
     </View>
    </SafeAreaView>
   )

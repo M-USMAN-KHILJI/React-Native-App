@@ -15,6 +15,10 @@ import CreateMatch from '../Screens/Main/createMatch'
 import Challenges from '../Screens/Main/Challenges'
 import EnergyPacks from '../Screens/Main/energyPacks'
 import Notifaction from '../Screens/Main/Notifaction'
+import Tormament from '../Screens/Main/Tormament'
+import TournamentDetial from '../Screens/Main/TournamentDetial'
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +40,9 @@ const StackNavigation = () => {
         <Stack.Screen name="Challenges" component={Challenges} />
         <Stack.Screen name="EnergyPacks" component={EnergyPacks} />
         <Stack.Screen name="Notifaction" component={Notifaction} />
+        <Stack.Screen name="Tormament" component={Tormament} />
+        <Stack.Screen name="TournamentDetial" component={TournamentDetial} />
+        
     </Stack.Navigator>
   )
 }

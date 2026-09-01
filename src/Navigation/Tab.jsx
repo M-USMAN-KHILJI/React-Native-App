@@ -3,10 +3,12 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { COLORS, FONT_SIZES } from '../Const/Display';
-
+import Overview from '../Screens/Main/Overview';
+import Statistics from '../Screens/Main/Statistics';
+import Collection from '../Screens/Main/Collection';
+import CustomButton from '../Components/CustomButton';
 const Tab = createMaterialTopTabNavigator();
 
-// Custom Top Tab Bar Component – reusable across screens
 const CustomTabBar = ({ state, descriptors, navigation }) => {
   return (
     <View style={styles.container}>
@@ -52,40 +54,70 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
   );
 };
 
+const renderTabBar = (props) => <CustomTabBar {...props} />;
+
+const ProfileTabs = () => (
+  <Tab.Navigator
+    initialRouteName="Overview"
+    tabBar={renderTabBar}
+    screenOptions={{
+      swipeEnabled: true,
+      tabBarStyle: styles.tabBarStyle,
+      tabBarIndicatorStyle: { backgroundColor: 'transparent' },
+      lazy: true,
+    }}
+  >
+    <Tab.Screen >
+      {
+        props => <CustomButton title="Overview" onPress={() => props.navigation.navigate("Overview")} />
+      }
+    </Tab.Screen>
+    <Tab.Screen name="Statistics" component={Statistics} options={{ tabBarLabel: 'Statistics' }} />
+    <Tab.Screen name="Collection" component={Collection} options={{ tabBarLabel: 'Collection' }} />
+  </Tab.Navigator>
+);
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginHorizontal: wp(5),
-    marginTop: hp(1.5),
-    gap: wp(2),
+    marginHorizontal: wp(0),
+    marginTop: hp(1),
+    gap: wp(3),
+  },
+  tabBarStyle: {
+    backgroundColor: 'transparent',
+    elevation: 0,
+    shadowOpacity: 0,
+    borderBottomWidth: 0,
   },
   tab: {
     flex: 1,
-    paddingVertical: hp(1.6),
+    paddingVertical: hp(1.5),
     borderRadius: wp(8),
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
   },
   tabActive: {
     backgroundColor: COLORS.activeChipBg,
+    borderColor: COLORS.goldenBtn,
   },
   tabInactive: {
-    backgroundColor: COLORS.tabInactiveBg,
-    borderWidth: 1,
-    borderColor: COLORS.tabInactiveBorder,
+    backgroundColor: 'transparent',
+    borderColor: COLORS.goldenBtn,
   },
   tabLabel: {
-    fontSize: hp(1.7),
-    fontWeight: 'bold',
-    letterSpacing: 0.5,
+    fontSize: FONT_SIZES.bodyLarge,
+    fontWeight: '700',
+    letterSpacing: 0.2,
   },
   tabLabelActive: {
     color: COLORS.activeChipText,
   },
   tabLabelInactive: {
-    color: COLORS.grayText,
+    color: COLORS.gold,
   },
 });
 
-export { CustomTabBar, Tab };
-export default CustomTabBar;
+export { CustomTabBar, Tab, ProfileTabs };
+export default ProfileTabs;

@@ -1,61 +1,19 @@
-// import React, { useState } from 'react';
-// import {
-//   View,
-//   Text,
-//   StyleSheet,
-//   TouchableOpacity,
-//   ScrollView,
-//   FlatList,
-// } from 'react-native';
-// import { SafeAreaView } from 'react-native-safe-area-context';
-// import { COLORS, FONT_SIZES } from '../../Const/Display';
-// import {
-//   widthPercentageToDP as wp,
-//   heightPercentageToDP as hp,
-// } from 'react-native-responsive-screen';
-// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import CustomDrawer from '../../Components/drawer';
-
 import {
-        View,
+    View,
     Text,
     StyleSheet,
-    TextInput,
-    Image,
-    ActivityIndicator,
     TouchableOpacity,
-    Button,
-    Platform,
-    KeyboardAvoidingView,
-    Alert,
-    ScrollView,
     FlatList,
-    TouchableWithoutFeedback,
-    Keyboard,
     wp,
     hp,
     COLORS,
     FONT_SIZES,
-    logo,
     SafeAreaView,
-    FontAwesome,
-    CustomInput,
-    CustomButton,
-    GoogleButton,
+    MaterialCommunityIcons,
+    CustomDrawer,
     React,
     useState,
-    useEffect,
-    useContext,
-    AuthHeader,
-    useRef,
-    TermsBottomSheet,
-    useGoogleSignIn,
-    Modal,
-    Dimensions,
-    MaterialCommunityIcons,
-    screenHarder,
-    LinearGradient,
-    CustomDrawer
+   
 } from "../../api/Index.js";
 
 const Notifaction = ({ navigation }) => {
