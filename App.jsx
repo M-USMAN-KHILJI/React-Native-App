@@ -9,9 +9,7 @@ import Orientation from 'react-native-orientation-locker';
 import { useEffect } from 'react';
 
 
-GoogleSignin.configure({
-  webClientId: '465563276332-lia005quikdf14hu327s3ko2givlnrac.apps.googleusercontent.com', 
-});
+
 
 const App = () => {
 
